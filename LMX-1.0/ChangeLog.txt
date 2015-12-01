@@ -1,0 +1,16 @@
+Addition of reset(qt) function:
+-- Simulation class: void reset(qt) // sets q and advances a time step
+-- Analysis class: void resetAndAdvance(qt)=0;
+---- AnalysisThermalDynamic: void resetAndAdvance(qt) // calls the integrator functions
+-- lmx::DiffProblem: void advance() // advances integrator and configuration, calls steptriggered, writes stepfiles
+
+
+Iterations limited to 6 in:
+--  void DiffProblemFirst<Sys,T>::stepSolveImplicit( )
+
+Valgrind run:
+-- Removed line from void Configuration<T>::setInitialCondition
+	temp = new lmx::Vector<T>(vectorSize);
+-- lmx_diff_configuration.h completely redone to remove the vector time, which was increasing in size every step
+
+
