@@ -31,13 +31,29 @@
 
 using namespace std;
 
+char* file2char(std::string fileName)
+{
+  std::ifstream fin(fileName);
+  // get pointer to associated buffer object
+  std::filebuf* pbuf = fin.rdbuf();
+  // get file size using buffer's members
+  std::size_t size = pbuf->pubseekoff (0,fin.end,fin.in);
+  pbuf->pubseekpos (0,fin.in);
+  // allocate memory to contain file data
+  char* buffer=new char[size];
+  // get file data
+  pbuf->sgetn (buffer,size);
+  fin.close();
+  return buffer;
+}
+
 int main(int argc, char *argv[])
 {
   lmx::setMatrixType( 2 );
   lmx::setLinSolverType( 0 );
   
 //   int totalPulses(1000), loadSteps(10E2), cooldownSteps(100E2); 
-  int totalPulses(100), loadSteps(10E2), cooldownSteps(1000E2); 
+  int totalPulses(1), loadSteps(10E2), cooldownSteps(1000E2); 
 //   int totalPulses(3), loadSteps(10), cooldownSteps(1000); 
 
 //   double stepTime(0);
@@ -51,10 +67,18 @@ int main(int argc, char *argv[])
 //       accumulatedTimes.reserve(loadSteps+cooldownSteps+1);
 //       stepIterations.reserve(loadSteps+cooldownSteps+1);
 
+// Read input files:
+  char* input = file2char("input.txt");
+  char* mesh = file2char("mesh_104.txt");
+  char* capacity = file2char("thermalcapacity.txt");
+  char* conductivity = file2char("thermalconductivity.txt");
+
   mknix::Simulation mySimulation;
-//   mySimulation.setOutputFilesDetail(0);
-  mySimulation.setOutputFilesDetail(1);
-  mySimulation.inputFromFile("Tile6-RT");
+//  mySimulation.setOutputFilesDetail(0); // none
+  mySimulation.setOutputFilesDetail(2); // only times
+  mySimulation.inputFromChars(input,mesh,capacity,conductivity);
+//  mySimulation.inputFromFile("Tile6-RT");
+
   std::vector<double> intNodes = mySimulation.getInterfaceNodesCoords();
   cout << "NODES: " << intNodes.size() << endl;
   cout << intNodes[0] << " ... " << intNodes[72];

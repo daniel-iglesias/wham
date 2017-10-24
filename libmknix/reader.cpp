@@ -48,6 +48,14 @@ Reader::~Reader()
 {
 }
 
+void Reader::generateTile(char *input_in, char *mesh_in, char *capacity_in, char *conductivity_in)
+{
+  input << input_in;
+  mesh << mesh_in;
+  thermalcapacity << capacity_in;
+  thermalconductivity << conductivity_in;
+}
+
 void Reader::generateTile6_104()
 {
   input << "TITLE tile6\n";
