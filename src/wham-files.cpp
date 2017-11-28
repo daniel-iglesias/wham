@@ -34,15 +34,10 @@ using namespace std;
 char* file2char(std::string fileName)
 {
   std::ifstream fin(fileName);
-  // get pointer to associated buffer object
-  std::filebuf* pbuf = fin.rdbuf();
-  // get file size using buffer's members
-  std::size_t size = pbuf->pubseekoff (0,fin.end,fin.in);
-  pbuf->pubseekpos (0,fin.in);
-  // allocate memory to contain file data
-  char* buffer=new char[size];
-  // get file data
-  pbuf->sgetn (buffer,size);
+  std::string fcontents((std::istreambuf_iterator<char>(fin)), 
+    std::istreambuf_iterator<char>());
+  char *buffer = new char[fcontents.length() + 1];
+  strcpy(buffer, fcontents.c_str());
   fin.close();
   return buffer;
 }
@@ -77,7 +72,6 @@ int main(int argc, char *argv[])
 //  mySimulation.setOutputFilesDetail(0); // none
   mySimulation.setOutputFilesDetail(2); // only times
   mySimulation.inputFromChars(input,mesh,capacity,conductivity);
-//  mySimulation.inputFromFile("Tile6-RT");
 
   std::vector<double> intNodes = mySimulation.getInterfaceNodesCoords();
   cout << "NODES: " << intNodes.size() << endl;
@@ -212,6 +206,10 @@ int main(int argc, char *argv[])
 //       stepIterations.clear();
   }
   mySimulation.endSimulation();
+  delete [] input;
+  delete [] mesh;
+  delete [] capacity;
+  delete [] conductivity;
   
   return EXIT_SUCCESS;
 }
