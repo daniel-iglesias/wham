@@ -35,10 +35,10 @@ int main(int argc, char *argv[])
 {
   lmx::setMatrixType( 2 );
   lmx::setLinSolverType( 0 );
-  
-//   int totalPulses(1000), loadSteps(10E2), cooldownSteps(100E2); 
-  int totalPulses(1), loadSteps(10E2), cooldownSteps(1000E2); 
-//   int totalPulses(3), loadSteps(10), cooldownSteps(1000); 
+
+//   int totalPulses(1000), loadSteps(10E2), cooldownSteps(100E2);
+  int totalPulses(1), loadSteps(10), cooldownSteps(1000);
+//   int totalPulses(3), loadSteps(10), cooldownSteps(1000);
 
 //   double stepTime(0);
 //   lmx::ExactStopwatch* globalTimer;
@@ -107,7 +107,7 @@ int main(int argc, char *argv[])
 //       heatFluence[15] = 0;
 //       heatFluence[16] = 66066.8;
 //       heatFluence[17] = 126981;
-//       heatFluence[18] = 97147.6; 
+//       heatFluence[18] = 97147.6;
 //       heatFluence[19] = 67313.8;
 //       heatFluence[20] = 37480.1;
 //       heatFluence[21] = 8532.35;
@@ -120,7 +120,7 @@ int main(int argc, char *argv[])
 //       heatFluence[28] = 0;
 //       heatFluence[29] = 0;
 //       heatFluence[30] = 0;
-      
+
       mySimulation.solveStep(heatFluence, temperatures);
 //       stepTime+=0.01;
 //       stepTimes.push_back(stepTime);
@@ -128,7 +128,7 @@ int main(int argc, char *argv[])
 //       stepIterations.push_back(0);
 
 //       sleep( 1E-4);
-      
+
     }
     for(int i=0; i<cooldownSteps; ++i){
       heatFluence[0] = 0;
@@ -174,15 +174,15 @@ int main(int argc, char *argv[])
 //       stepTimes.push_back(stepTime);
 //       accumulatedTimes.push_back(globalTimer->getTime());
 //       stepIterations.push_back(0);
-//       
-//       timerFile << stepTimes[0] << "\t" 
-// 		<< accumulatedTimes[0] << "\t" 
-// 		<< accumulatedTimes[0] << "\t" 
+//
+//       timerFile << stepTimes[0] << "\t"
+// 		<< accumulatedTimes[0] << "\t"
+// 		<< accumulatedTimes[0] << "\t"
 // 		<< stepIterations[0] << std::endl;
 //       for(int i=1; i<stepTimes.size(); ++i){
-//       timerFile << stepTimes[i] << "\t" 
-// 		<< accumulatedTimes[i]-accumulatedTimes[i-1] << "\t" 
-// 		<< accumulatedTimes[i] << "\t" 
+//       timerFile << stepTimes[i] << "\t"
+// 		<< accumulatedTimes[i]-accumulatedTimes[i-1] << "\t"
+// 		<< accumulatedTimes[i] << "\t"
 // 		<< stepIterations[i] << std::endl;
 //       }
 //       stepTimes.clear();
@@ -190,6 +190,6 @@ int main(int argc, char *argv[])
 //       stepIterations.clear();
   }
   mySimulation.endSimulation();
-  
+
   return EXIT_SUCCESS;
 }

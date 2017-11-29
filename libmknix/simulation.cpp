@@ -51,6 +51,7 @@ Simulation::Simulation()
     , outFile(0)
     , configurationFile(0)
     , initialTemperature(0)
+    , theContact(0)
 {
     globalTimer = new lmx::ExactStopwatch;
     globalTimer->setQuiet();
@@ -133,7 +134,7 @@ void Simulation::init(int totalSteps=0)
             itAnalysis!= analysis.end();
             ++itAnalysis
         )
-    {   
+    {
       if( (*itAnalysis)->type() == "THERMAL" || (*itAnalysis)->type() == "THERMALSTATIC") {
         this->initThermalSimulation(*itAnalysis);
       }
@@ -196,17 +197,17 @@ void Simulation::endSimulation()
 {
     if(outputFilesDetail>0){
 //       double theTime = globalTimer->getTime();
-      *timerFile << stepTimes[0] << "\t" 
-		<< accumulatedTimes[0] << "\t" 
-		<< accumulatedTimes[0] << "\t" 
+      *timerFile << stepTimes[0] << "\t"
+		<< accumulatedTimes[0] << "\t"
+		<< accumulatedTimes[0] << "\t"
 		<< stepIterations[0] << std::endl;
       for(int i=1; i<stepTimes.size(); ++i){
-      *timerFile << stepTimes[i] << "\t" 
-		<< accumulatedTimes[i]-accumulatedTimes[i-1] << "\t" 
-		<< accumulatedTimes[i] << "\t" 
+      *timerFile << stepTimes[i] << "\t"
+		<< accumulatedTimes[i]-accumulatedTimes[i-1] << "\t"
+		<< accumulatedTimes[i] << "\t"
 		<< stepIterations[i] << std::endl;
       }
-      
+
     }
     if(outputFilesDetail>1){
       std::ifstream disp("dis.dat");
@@ -238,7 +239,7 @@ void Simulation::endSimulation()
 
 void Simulation::run()
 {
-#ifdef HAVE_VTK  
+#ifdef HAVE_VTK
     if(Simulation::contact == "GLOBAL" || Simulation::visualization == 1) {
         this->theContact = new Contact(this, 10.);
         this->theContact->createPoints();
@@ -529,7 +530,7 @@ void Simulation::writeSystem()
     *outFile << "JOINTS" << endl;
     baseSystem->writeJoints( outFile );
     *outFile << "ENDJOINTS" << endl;
-  
+
     *outFile << "ENDSYSTEM" << endl;
 
     // write a standard file for nodal info:
@@ -689,7 +690,7 @@ void Simulation::dynamicThermalResidue  ( lmx::Vector<data_type>& residue,
     baseSystem->calcCapacityMatrix();
     baseSystem->calcConductivityMatrix();
     baseSystem->calcExternalHeat();
-    
+
     baseSystem->assembleCapacityMatrix( globalCapacity );
     baseSystem->assembleConductivityMatrix( globalConductivity );
     baseSystem->assembleExternalHeat( globalExternalHeat );
@@ -998,7 +999,7 @@ bool Simulation::staticConvergence ( lmx::Vector<data_type>& res,
 
 
 void Simulation::stepTriggered( ) {
-#ifdef HAVE_VTK  
+#ifdef HAVE_VTK
     if(contact=="GLOBAL" || visualization==1) {
         this->theContact->updatePoints();
         this->theContact->updateLines();
@@ -1014,9 +1015,9 @@ void Simulation::stepTriggered( ) {
     // Output timer info:
   if(outputFilesDetail>0){
 //     double theTime = globalTimer->getTime();
-//     *timerFile << stepTime << "\t" 
-// 	       << theTime-oldClockTime << "\t" 
-// 	       << theTime<< "\t" 
+//     *timerFile << stepTime << "\t"
+// 	       << theTime-oldClockTime << "\t"
+// 	       << theTime<< "\t"
 //                << iterationsNLSolver << std::endl;
     stepTimes.push_back(stepTime);
     accumulatedTimes.push_back(globalTimer->getTime());

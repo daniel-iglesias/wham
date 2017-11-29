@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
   lmx::setLinSolverType( 0 );
   
 //   int totalPulses(1000), loadSteps(10E2), cooldownSteps(100E2); 
-  int totalPulses(1), loadSteps(10E2), cooldownSteps(1000E2); 
+  int totalPulses(1), loadSteps(10), cooldownSteps(1000); 
 //   int totalPulses(3), loadSteps(10), cooldownSteps(1000); 
 
 //   double stepTime(0);
@@ -69,8 +69,9 @@ int main(int argc, char *argv[])
   char* conductivity = file2char("thermalconductivity.txt");
 
   mknix::Simulation mySimulation;
-//  mySimulation.setOutputFilesDetail(0); // none
-  mySimulation.setOutputFilesDetail(2); // only times
+  mySimulation.setOutputFilesDetail(0); // none
+//  mySimulation.setOutputFilesDetail(1); // only times
+//  mySimulation.setOutputFilesDetail(2); // all output
   mySimulation.inputFromChars(input,mesh,capacity,conductivity);
 
   std::vector<double> intNodes = mySimulation.getInterfaceNodesCoords();
