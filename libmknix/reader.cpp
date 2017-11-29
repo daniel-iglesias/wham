@@ -433,7 +433,7 @@ void Reader::generateTile6_104()
   input << "  ENDFLEXBODIES\n";
   input << "\n";
   input << "MIRROR x\n";
-  input << "SHIFT 2.98711 0 0\n";
+  input << "SHIFT 2.98711 -1.74595 0\n";
   input << "\n";
   input << "  JOINTS\n";
   input << "  ENDJOINTS\n";
