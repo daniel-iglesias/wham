@@ -139,7 +139,7 @@ void Simulation::init(int totalSteps=0)
         this->initThermalSimulation(*itAnalysis);
       }
       else {
-	cout << "ANALYSIS NOT AVAILABLE" << endl;
+//	cout << "ANALYSIS NOT AVAILABLE" << endl;
 //             if( (*itAnalysis)->type() == "STATIC" || (*itAnalysis)->type() == "DYNAMIC")
 //                 this->baseSystem->setMechanical();
 //             this->runMechanicalAnalysis(*itAnalysis);
@@ -290,9 +290,6 @@ void Simulation::runThermalAnalysis(Analysis* theAnalysis_in)
         baseSystem->assembleCapacityMatrix( globalCapacity );
         baseSystem->calcConductivityMatrix();
         baseSystem->assembleConductivityMatrix( globalConductivity );
-	cout << globalCapacity << endl;
-        cout << globalConductivity;
-
 //         cout << globalCapacity;
 //         cout << globalConductivity;
         // maybe is better to make an specific function call for the sparse
@@ -363,10 +360,10 @@ void Simulation::runThermalAnalysis(Analysis* theAnalysis_in)
     // output f_int of constraints...
     lmx::Vector<double> constr_forces(nodes.size()*dimension);
     baseSystem->assembleConstraintForces( constr_forces );
-    for(size_type i=0; i< constr_forces.size(); ++i ) {
-        if(constr_forces(i) != 0. )
-            cout << "R(" << i << ") = " << constr_forces(i) << endl;
-    }
+//    for(size_type i=0; i< constr_forces.size(); ++i ) {
+//        if(constr_forces(i) != 0. )
+//            cout << "R(" << i << ") = " << constr_forces(i) << endl;
+//    }
 }
 
 void Simulation::runMechanicalAnalysis(Analysis* theAnalysis_in)

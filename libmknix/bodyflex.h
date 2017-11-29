@@ -49,7 +49,7 @@ public:
     virtual void setFormulation( std::string formulation_in )
     {
         formulation = formulation_in;
-        cout << formulation << endl;
+//        cout << formulation << endl;
     }
 
 //     virtual void initialize( ) = 0;

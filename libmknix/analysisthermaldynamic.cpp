@@ -71,6 +71,7 @@ void AnalysisThermalDynamic::init(lmx::Vector< data_type > * qt_in)
 //     if( lmx::getMatrixType() == 1 )
 //    theProblem.setSparsePatternJacobian( theSimulation->getSparsePattern() ); // TBD for 1-DOF
 //         cout << *qt_in << endl;
+    theProblem.setVervosity(0);
     theProblem.setInitialConfiguration( *qt_in );
     theProblem.initialize();
 }

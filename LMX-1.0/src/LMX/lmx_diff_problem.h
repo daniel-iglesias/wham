@@ -61,17 +61,19 @@ template <typename Sys, typename T=double> class DiffProblem{
 
     /** Empty constructor. */
     DiffProblem()
-	   : theConfiguration(0)
-	   , theIntegrator(0)
-	   , theNLSolver(0)
-	   , theSystem(0)
-     , p_delta_q(0)
-     , b_steptriggered(0)
-    {}
+            : theConfiguration(0)
+            , theIntegrator(0)
+            , theNLSolver(0)
+            , theSystem(0)
+            , p_delta_q(0)
+            , b_steptriggered(0)
+            , vervosity(2)
+            { }
 
     /** Destructor. */
     virtual ~DiffProblem()
-    {}
+    {
+    }
 
     /**
      * @param system_in Object that defines the differential system equations.
@@ -98,6 +100,10 @@ template <typename Sys, typename T=double> class DiffProblem{
     bool isIntegratorExplicit()
     { if(theIntegrator) return this->theIntegrator->isExplicit(); }
     
+    void setVervosity(int level){
+        vervosity = level;
+    }
+
     /**
      * Solve method to be implemented in derived classes.
      */
@@ -126,6 +132,7 @@ template <typename Sys, typename T=double> class DiffProblem{
 	double epsilon; ///< Value for L2 convergence.
     std::map< int, std::ofstream* > fileOutMap; ///< collection of output streams for each diff-order requested.
     void (Sys::* stepTriggered)(); ///< function called at the end of each time step
+    int vervosity;
 };
 
 
@@ -198,7 +205,7 @@ template <typename Sys, typename T>
   theConfiguration = new Configuration<T>;
 
   theConfiguration->setInitialCondition(0, q_o);
-
+    if (vervosity == 0) theConfiguration->quiet();
 }
 
 /**
@@ -214,7 +221,7 @@ template <typename Sys, typename T>
 
   theConfiguration->setInitialCondition(0, q_o);
   theConfiguration->setInitialCondition(1, qdot_o);
-
+    if (vervosity == 0) theConfiguration->quiet();
 }
 
 

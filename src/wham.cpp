@@ -59,8 +59,8 @@ int main(int argc, char *argv[])
   mySimulation.inputFromFile("Tile6-RT");
 
   std::vector<double> intNodes = mySimulation.getInterfaceNodesCoords();
-  cout << "NODES: " << intNodes.size() << endl;
-  cout << intNodes[0] << " ... " << intNodes[72];
+//  cout << "NODES: " << intNodes.size() << endl;
+//  cout << intNodes[0] << " ... " << intNodes[72];
   mySimulation.setInitialTemperatures(107);
   mySimulation.init(totalPulses*(loadSteps+cooldownSteps));
   double heatFluence[21];

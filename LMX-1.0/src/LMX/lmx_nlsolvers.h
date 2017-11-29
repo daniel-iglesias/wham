@@ -64,7 +64,7 @@ namespace lmx {
          , externalConvergence2(0)
          , externalConvergence3(0)
          , deltaInResidue(0)
-         , info(1)
+         , info(0)
      /**
       * Empty constructor. 
       */

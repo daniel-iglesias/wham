@@ -64,7 +64,7 @@ template <class T> class Configuration
     /** Empty constructor. */
     Configuration() 
     : vectorSize( 0 )
-    , verbose( 1 )
+    , verbose( 0 )
     , lastStepSize(0)
     , steps(0)
     , presentTime(0)
@@ -192,12 +192,14 @@ template <class T>
   }
   *q[diff_order][0] = q_o; // copies values... perhaps should use input values instead.
 
-  cout << "--------------------------------------------------------" << endl;
-  cout << "An initial condition has been set:" << endl;
-  cout << "Derivative order = " << diff_order;
-  cout << ", size of vector = " << q_o.size() << endl;
+  if (verbose){
+    cout << "--------------------------------------------------------" << endl;
+    cout << "An initial condition has been set:" << endl;
+    cout << "Derivative order = " << diff_order;
+    cout << ", size of vector = " << q_o.size() << endl;
 //       << ", q_0 = " << *q[diff_order][0] << endl;
-  cout << "--------------------------------------------------------" << endl;
+    cout << "--------------------------------------------------------" << endl;
+  }
 }
 
 
@@ -229,12 +231,14 @@ template <class T>
     q[ q.size()-1 ].push_back(new lmx::Vector<T>(vectorSize));
   }
 
-  cout << "--------------------------------------------------------" << endl;
-  cout << "Configuration has been resized to the following vectors:" << endl;
-  for ( i = 0; i < q.size(); ++i ){
-    cout << "Derivative order = " << i << ", time line size = " << q[i].size() << endl;
+  if (verbose){
+    cout << "--------------------------------------------------------" << endl;
+    cout << "Configuration has been resized to the following vectors:" << endl;
+    for ( i = 0; i < q.size(); ++i ){
+      cout << "Derivative order = " << i << ", time line size = " << q[i].size() << endl;
+    }
+    cout << "--------------------------------------------------------" << endl;
   }
-  cout << "--------------------------------------------------------" << endl;
 }
 
 /**
