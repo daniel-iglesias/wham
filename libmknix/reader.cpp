@@ -46,6 +46,7 @@ Reader::Reader(Simulation* simulation_in)
 
 Reader::~Reader()
 {
+   delete theReaderFlex; theReaderFlex=0;
 }
 
 void Reader::generateTile(char *input_in, char *mesh_in, char *capacity_in, char *conductivity_in)

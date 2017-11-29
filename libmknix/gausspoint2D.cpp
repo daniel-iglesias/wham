@@ -66,6 +66,7 @@ GaussPoint2D::GaussPoint2D( double alpha_in,
 
 GaussPoint2D::~GaussPoint2D()
 {
+   delete shapeFun; shapeFun=0;
 }
 
 

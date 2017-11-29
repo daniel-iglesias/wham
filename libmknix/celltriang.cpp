@@ -51,6 +51,9 @@ CellTriang::CellTriang( Material& material_in,
 
 CellTriang::~CellTriang()
 {
+   for( int i = 0 ; i < gPoints.size(); i++)
+     delete gPoints[i];
+   gPoints.clear();
 }
 
 

@@ -45,6 +45,19 @@ Body::Body( std::string title_in )
 
 Body::~Body()
 {
+   for( int i = 0 ; i < temperature.size(); i++)
+     delete temperature[i];
+   temperature.clear();
+
+   std::map<int,Cell*>::iterator itCells;
+   for ( itCells = cells.begin();
+            itCells!= cells.end();
+            ++itCells
+        )
+    {
+        delete itCells->second;
+		cells.erase(itCells);
+    }
 }
 
 /**

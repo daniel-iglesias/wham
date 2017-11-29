@@ -68,6 +68,15 @@ Simulation::~Simulation()
   if (timerFile)  delete timerFile;
   if (configurationFile)  delete configurationFile;
   if (outFile)  delete outFile;
+  if (theReader)  delete theReader;
+  if (baseSystem)  delete baseSystem;
+  if (theContact)  delete theContact;
+   for( int i = 0 ; i < analysis.size(); i++)
+     delete analysis[i];
+   analysis.clear();
+   for( int i = 0 ; i < nodes.size(); i++)
+     delete nodes[i];
+   nodes.clear();
 }
 
 void Simulation::inputFromFile(char *FileIn)

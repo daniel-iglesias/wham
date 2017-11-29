@@ -52,6 +52,9 @@ ElemTriangle::ElemTriangle( Material& material_in,
 
 ElemTriangle::~ElemTriangle()
 {
+   for( int i = 0 ; i < gPoints_MC.size(); i++)
+     delete gPoints_MC[i];
+   gPoints_MC.clear();
 }
 
 

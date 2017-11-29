@@ -44,6 +44,17 @@ FlexBody::FlexBody( std::string title_in )
 
 FlexBody::~FlexBody()
 {
+   for( int i = 0 ; i < points.size(); i++)
+     delete points[i];
+   points.clear();
+ 
+   for( int i = 0 ; i < stress.size(); i++)
+     delete stress[i];
+   stress.clear();
+
+   for( int i = 0 ; i < energy.size(); i++)
+     delete energy[i];
+   energy.clear();
 }
 
 void FlexBody::addPoint( const Node* node_in ) // problems with munmap_chunk(). Use the later function

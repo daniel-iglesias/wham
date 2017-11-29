@@ -43,6 +43,34 @@ System::System(const char * title_in)
 
 System::~System()
 {
+   for( int i = 0 ; i < loadsThermal.size(); i++)
+     delete loadsThermal[i];
+   loadsThermal.clear();
+
+    for ( itFlexBodies = flexBodies.begin();
+            itFlexBodies!= flexBodies.end();
+            ++itFlexBodies
+        )
+    {
+        delete itFlexBodies->second;
+		flexBodies.erase(itFlexBodies);
+    }
+    for ( itThermalBodies = thermalBodies.begin();
+            itThermalBodies!= thermalBodies.end();
+            ++itThermalBodies
+        )
+    {
+        thermalBodies.erase(itThermalBodies);
+    }
+
+	for ( itSubSystems = subSystems.begin();
+            itSubSystems!= subSystems.end();
+            ++itSubSystems
+        )
+    {
+        delete itSubSystems->second;
+		subSystems.erase(itSubSystems);
+    }
 }
 
 // BUG: Specific for tiles susbsystem. That can change in input

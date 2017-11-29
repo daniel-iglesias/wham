@@ -78,6 +78,7 @@ Point::Point( int dim_in,
 
 Point::~Point()
 {
+   delete shapeFun; shapeFun=0;
 }
 
 double Point::getTemp( )
