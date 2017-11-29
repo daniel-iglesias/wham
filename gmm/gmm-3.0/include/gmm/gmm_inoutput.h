@@ -960,7 +960,7 @@ namespace gmm {
     fprintf(f, "%s ", MatrixMarketBanner);
     char *str = mm_typecode_to_str(matcode);
     fprintf(f, "%s\n", str);
-    free(str);
+	free((void *&) str);
     
     /* print matrix sizes and nonzeros */
     fprintf(f, "%d %d %d\n", M, N, nz);
