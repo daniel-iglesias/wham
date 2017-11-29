@@ -47,6 +47,7 @@ public:
 
     ~Reader();
 
+    void generateTile(char*, char*, char*, char*);
     void generateTile6_104();
     void generateTile6_109();
     void readInput();

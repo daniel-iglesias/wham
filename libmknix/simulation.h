@@ -52,6 +52,7 @@ public:
     ~Simulation();
 
     void inputFromFile(char*);
+    void inputFromChars(char*,char*,char*,char*);
 //     void geometryFile(char*);
 //     void outputFile(char*);
     std::vector<double> getInterfaceNodesCoords();

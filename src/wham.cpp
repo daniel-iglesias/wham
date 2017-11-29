@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
   lmx::setLinSolverType( 0 );
   
 //   int totalPulses(1000), loadSteps(10E2), cooldownSteps(100E2); 
-  int totalPulses(100), loadSteps(10E2), cooldownSteps(1000E2); 
+  int totalPulses(1), loadSteps(10E2), cooldownSteps(1000E2); 
 //   int totalPulses(3), loadSteps(10), cooldownSteps(1000); 
 
 //   double stepTime(0);
@@ -51,10 +51,12 @@ int main(int argc, char *argv[])
 //       accumulatedTimes.reserve(loadSteps+cooldownSteps+1);
 //       stepIterations.reserve(loadSteps+cooldownSteps+1);
 
+
   mknix::Simulation mySimulation;
-//   mySimulation.setOutputFilesDetail(0);
-  mySimulation.setOutputFilesDetail(1);
+//  mySimulation.setOutputFilesDetail(0); // none
+  mySimulation.setOutputFilesDetail(2); // only times
   mySimulation.inputFromFile("Tile6-RT");
+
   std::vector<double> intNodes = mySimulation.getInterfaceNodesCoords();
   cout << "NODES: " << intNodes.size() << endl;
   cout << intNodes[0] << " ... " << intNodes[72];

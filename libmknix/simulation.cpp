@@ -70,12 +70,20 @@ Simulation::~Simulation()
   if (outFile)  delete outFile;
 }
 
-
 void Simulation::inputFromFile(char *FileIn)
 {
     if(theReader==0)  this->theReader = new Reader(this);
     if(baseSystem==0)  this->baseSystem = new System( "baseSystem" );
     theReader->generateTile6_104();
+//     theReader->generateTile6_109();
+    theReader->readInput();
+}
+
+void Simulation::inputFromChars(char *input, char *mesh, char *capacity, char *conductivity)
+{
+    if(theReader==0)  this->theReader = new Reader(this);
+    if(baseSystem==0)  this->baseSystem = new System( "baseSystem" );
+    theReader->generateTile(input, mesh, capacity, conductivity);
 //     theReader->generateTile6_109();
     theReader->readInput();
 }
