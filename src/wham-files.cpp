@@ -70,8 +70,8 @@ int main(int argc, char *argv[])
 
   mknix::Simulation mySimulation;
   mySimulation.setOutputFilesDetail(0); // none
-//  mySimulation.setOutputFilesDetail(1); // only times
-//  mySimulation.setOutputFilesDetail(2); // all output
+//  mySimulation.setOutputFilesDetail(1); // only times and output.reader
+//  mySimulation.setOutputFilesDetail(2); // all output files
   mySimulation.inputFromChars(input,mesh,capacity,conductivity);
 
   std::vector<double> intNodes = mySimulation.getInterfaceNodesCoords();

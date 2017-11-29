@@ -55,11 +55,6 @@ Simulation::Simulation()
 {
     globalTimer = new lmx::ExactStopwatch;
     globalTimer->setQuiet();
-    if(outputFilesDetail>0){
-      timerFile = new std::ofstream("simulation_times.dat");
-      if(outputFilesDetail>1)
-	configurationFile = new std::ofstream("dis.dat");
-    }
 }
 
 
@@ -86,7 +81,7 @@ void Simulation::inputFromFile(char *FileIn)
     if(baseSystem==0)  this->baseSystem = new System( "baseSystem" );
     theReader->generateTile6_104();
 //     theReader->generateTile6_109();
-    theReader->readInput();
+    theReader->readInput(outputFilesDetail);
 }
 
 void Simulation::inputFromChars(char *input, char *mesh, char *capacity, char *conductivity)
@@ -95,7 +90,7 @@ void Simulation::inputFromChars(char *input, char *mesh, char *capacity, char *c
     if(baseSystem==0)  this->baseSystem = new System( "baseSystem" );
     theReader->generateTile(input, mesh, capacity, conductivity);
 //     theReader->generateTile6_109();
-    theReader->readInput();
+    theReader->readInput(outputFilesDetail);
 }
 std::vector<double> Simulation::getInterfaceNodesCoords()
 {
@@ -115,6 +110,11 @@ void Simulation::setInitialTemperatures(double temp_in)
 // Part copy of run(), limited to preparation and thermal dynamic analysis
 void Simulation::init(int totalSteps=0)
 {
+    if(outputFilesDetail>0){
+      timerFile = new std::ofstream("simulation_times.dat");
+      if(outputFilesDetail>1)
+      	configurationFile = new std::ofstream("dis.dat");
+    }
     if(outputFilesDetail>1){
       writeSystem();
       *outFile << "ANALYSIS " << endl;

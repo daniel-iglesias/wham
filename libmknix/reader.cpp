@@ -33,14 +33,12 @@ Reader::Reader()
     : theSimulation(0)
     , theReaderRigid(0)
 {
-    output.open("output.reader");
 }
 
 Reader::Reader(Simulation* simulation_in)
     : theSimulation( simulation_in )
     , theReaderRigid(0)
 {
-    output.open("output.reader");
 }
 
 
@@ -938,8 +936,11 @@ void Reader::generateTile6_109()
 
 } // namespace mknix
 
-void mknix::Reader::readInput()
+void mknix::Reader::readInput(int outputFileDetail)
 {
+  if(outputFileDetail > 0){
+    output.open("output.reader");
+  }
 
     char keyword[100];
     char a; // For reading one-by-one the file.

@@ -53,8 +53,9 @@ int main(int argc, char *argv[])
 
 
   mknix::Simulation mySimulation;
-//  mySimulation.setOutputFilesDetail(0); // none
-  mySimulation.setOutputFilesDetail(2); // only times
+  mySimulation.setOutputFilesDetail(0); // none
+//  mySimulation.setOutputFilesDetail(1); // only times and output.reader
+//  mySimulation.setOutputFilesDetail(2); // all output files
   mySimulation.inputFromFile("Tile6-RT");
 
   std::vector<double> intNodes = mySimulation.getInterfaceNodesCoords();
