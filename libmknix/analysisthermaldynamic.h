@@ -33,7 +33,7 @@ class AnalysisThermalDynamic : public Analysis
 public:
     AnalysisThermalDynamic();
 
-    AnalysisThermalDynamic( Simulation*, double, double, double, char* );
+    AnalysisThermalDynamic( Simulation*, double, double, double, char*, int );
 
     ~AnalysisThermalDynamic();
 
@@ -49,6 +49,7 @@ public:
 private:
     char* integratorType;
     double to, tf, At;
+    int max_iter;
     lmx::DiffProblemFirst< Simulation, data_type > theProblem;
 
 };

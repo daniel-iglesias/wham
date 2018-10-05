@@ -1388,6 +1388,7 @@ void mknix::Reader::readAnalysis( )
         if(!strcmp(keyword,"ENDANALYSIS")) return;
         else if(!strcmp(keyword,"THERMALDYNAMIC")) {
             char integratorType[20];
+            int max_iter=5;
             double to, tf, At;
             output << "\t"<< keyword << ":"
                    << std::endl;
@@ -1407,6 +1408,12 @@ void mknix::Reader::readAnalysis( )
                            << "INTEGRATOR: " << integratorType
                            << std::endl;
                 }
+                else if(!strcmp(keyword,"MAXITERATIONS")) {
+                    input >> max_iter;
+                    output << "\t\t"
+                           << "MAXITERATIONS: " << max_iter
+                           << std::endl;
+                }
                 else if(!strcmp(keyword,"TIME")) {
                     input >> to
                           >> tf
@@ -1419,7 +1426,7 @@ void mknix::Reader::readAnalysis( )
                 }
             }
             this->theSimulation->analysis.push_back
-            ( new AnalysisThermalDynamic( theSimulation, to, tf, At, integratorType ) );
+            ( new AnalysisThermalDynamic( theSimulation, to, tf, At, integratorType, max_iter ) );
         }
         else if(!strcmp(keyword,"OTRO")) {
         }

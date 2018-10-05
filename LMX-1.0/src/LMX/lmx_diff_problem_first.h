@@ -349,7 +349,7 @@ template <typename Sys, typename T>
 {
   this->theConfiguration->nextStep( this->stepSize );
   this->theIntegrator->advance( );
-  theNLSolver.solve( 6 );
+  theNLSolver.solve( this->max_iterations );
   if(this->b_steptriggered) (this->theSystem->*stepTriggered)( );
   this->writeStepFiles();
 }

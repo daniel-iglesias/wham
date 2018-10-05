@@ -33,16 +33,19 @@ AnalysisThermalDynamic::AnalysisThermalDynamic( Simulation* simulation_in,
         double to_in,
         double tf_in,
         double At_in,
-        char * integrator_in)
+        char * integrator_in,
+        int max_iter_in)
     :   Analysis(simulation_in)
     , integratorType(integrator_in)
     , to(to_in)
     , tf(tf_in)
     , At(At_in)
+    , max_iter(max_iter_in)
 {
     theProblem.setDiffSystem( *theSimulation );
     theProblem.setIntegrator( integrator_in );
     theProblem.setTimeParameters( to_in, tf_in, At_in );
+    theProblem.setMaxIterations( max_iter );
 
 //  theProblem.setOutputFile("dis.dat", 0);
 //     theProblem.setOutputFile("flux.dat", 1);

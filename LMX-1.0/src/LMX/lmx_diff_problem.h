@@ -68,6 +68,7 @@ template <typename Sys, typename T=double> class DiffProblem{
             , p_delta_q(0)
             , b_steptriggered(0)
             , vervosity(2)
+            , max_iterations(6)
             { }
 
     /** Destructor. */
@@ -104,6 +105,10 @@ template <typename Sys, typename T=double> class DiffProblem{
         vervosity = level;
     }
 
+    void setMaxIterations(int max_in){
+        max_iterations = max_in;
+    }
+
     /**
      * Solve method to be implemented in derived classes.
      */
@@ -133,6 +138,7 @@ template <typename Sys, typename T=double> class DiffProblem{
     std::map< int, std::ofstream* > fileOutMap; ///< collection of output streams for each diff-order requested.
     void (Sys::* stepTriggered)(); ///< function called at the end of each time step
     int vervosity;
+    int max_iterations;
 };
 
 
